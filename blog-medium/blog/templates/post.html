@@ -1,0 +1,564 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{% static 'assets/img/favicon.ico' %}">
+<title>Mediumish - A Medium style template by WowThemes.net</title>
+<!-- Bootstrap core CSS -->
+<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'assets/css/mediumish.css' %}" rel="stylesheet">
+<style>
+	.scrolltextarea::-webkit-scrollbar {
+		display: none;
+	  }
+	  .scrolltextarea {
+		font-size: 14px;
+	  }
+</style>
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+	<!-- Begin Logo -->
+	<a class="navbar-brand" href="index.html">
+	<img src="{% static 'assets/img/logo.png' %}" alt="logo">
+	</a>
+	<!-- End Logo -->
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<!-- Begin Menu -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			<a class="nav-link" href="index.html">Stories <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="post.html">Post</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="author.html">Author</a>
+			</li>
+		</ul>
+		<!-- End Menu -->
+		<!-- Begin Search -->
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+		</form>
+		<!-- End Search -->
+	</div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Article
+================================================== -->
+<div class="container">
+	<div class="row">
+
+		<!-- Begin Fixed Left Share -->
+		<div class="col-md-2 col-xs-12">
+			<div class="share" style="display:block;">
+				
+
+			</div>
+			<!--This place can be used for ads-->
+		</div>
+		<!-- End Fixed Left Share -->
+
+		<!-- Begin Post -->
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+			<div class="mainheading">
+				<h1 class="posttitle">{{po.title}}</h1>
+				<!-- <div class="row">
+					<div class="col-2 p-2">
+						<a href="/{{con.username}}/">
+						{% if usr.image %}
+						<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+						{% else %}
+						<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+						{% endif %}
+					</a>
+				</div>
+					<div class="col-10 p-2"><a href="/{{con.username}}/">
+						{% if usr.name %}
+						<p>{{usr.name}} <i class="fa fa-minus"></i> {{po.created}}</p>
+						{% else %}
+						<p>{{con.username}} {{po.created}}</p>
+						{% endif %}</a>
+					</div>
+				</div> -->
+			</div>
+
+			<!-- Begin Featured Image -->
+			<!-- <img class="featured-image img-fluid" src="{% static 'assets/img/demopic/10.jpg' %}" alt=""> -->
+			<!-- End Featured Image -->
+
+			<!-- Begin Post Content -->
+			<div class="article-post" style="overflow: auto;">
+				{{po.post|safe}}
+			</div>
+			<!-- End Post Content -->
+
+			 
+			  
+
+
+
+
+
+
+			<!-- Begin Tags --><br>
+				{% if tags %}
+			<div class="after-post-tags">
+				<ul class="tags">
+					{% for tag in tags %}
+					<li><a href="#">{{tag}}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+			<!-- End Tags --><br>
+			<div class="mainheading">
+				<!-- Begin Top Meta -->
+				<div class="row post-top-meta"><br>
+					<div class="col-md-2">
+						<div style="display:flex; justify-content: center; align-items: center; overflow: hidden;">
+						<a href="/{{con.username}}/">
+							{% if usr.image %}
+							<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+							{% else %}
+							<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+							{% endif %}
+						</a></div>
+					</div>
+					<div class="col-md-10"><br>
+						{% if usr.name %}
+						<a class="link-dark" href="/{{con.username}}/">{{usr.name}}</a>
+						{% else %}
+						<a class="link-dark" href="/{{con.username}}/">{{con.username}}</a>
+						{% endif %}
+						{% if not thisisuser %}
+						{% if follow %}
+						<a href="#" id="followuserbutton" onclick="followbutton(event, '{{con.username}}', {{po.id}})" class="btn follow p-2">Following</a>
+						{% else %}
+						<a href="#" id="followuserbutton" onclick="followbutton(event, '{{con.username}}', {{po.id}})" class="btn subscribe">Follow</a>
+						{% endif %}
+						{% endif %}<br>
+						<span class="author-description">{{usr.bio}}</span><br>
+						<span class="post-date">{{po.created}}</span><span class="dot"></span><span class="post-read">6 min read</span>
+					</div>
+				</div>
+				<!-- End Top Menta -->
+			</div>
+
+		</div>
+		<!-- End Post -->
+
+	</div>
+</div>
+<!-- End Article
+================================================== -->
+
+
+<div class="hideshare"></div>
+
+<!-- Begin Related
+================================================== -->
+<div class="graybg">
+	<div class="container">
+		<div class="row listrecent listrelated">
+
+			<!-- begin post -->
+			{% for post in posts %}
+			{% if not post.id == po.id %}
+			<div class="col-md-4">
+				<div class="card">
+					<a href="/{{con.username}}/{{post.title|slugify}}-{{post.id}}/">
+					<img class="img-fluid img-thumb" style="object-fit: cover; overflow:hidden; width:100%;height:auto" src="{{post.thumbnail}}" alt="">
+					</a>
+					<div class="card-block">
+						<h2 class="card-title"><a href="/{{con.username}}/{{post.title|slugify}}-{{post.id}}/">{{post.title}}</a></h2>
+						<h4 class="card-text">{{post.caption}}</h4>
+						<div class="metafooter">
+							<div class="wrapfooter">
+								<span class="meta-footer-thumb">
+								<a href="/{{con.username}}/">
+									{% if usr.image %}
+									<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+									{% else %}
+									<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+									{% endif %}
+								</a>
+								</span>
+								<span class="author-meta">
+								<span class="post-name">
+									{% if usr.name %}
+									<a href="/{{con.username}}/">{{usr.name}}</a>
+									{% else %}
+									<a href="/{{con.username}}/">{{con.username}}</a>
+									{% endif %}
+								</span><br/>
+								<span class="post-date">{{post.created}}</span><span class="dot"></span><span class="post-read">6 min read</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+			<!-- end post -->
+
+			
+			<div style="width: 100%;max-width:100%;text-align:center"><br><a href="/{{con.username}}/">More from 
+				{% if usr.name %}
+				{{usr.name}}
+				{% else %}
+				{{con.username}}
+				{% endif %}...</a></div>
+		</div>
+	</div>
+</div>
+<!-- End Related Posts
+================================================== -->
+
+<!-- Comment section begin<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2 col-xs-12">
+		</div>
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+			{% if request.user.is_authenticated %}
+			{% if co %}
+			<div class="mainheading">
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+						<a href="/{{curr_con.username}}/">
+							{% if curr_usr.image %}
+							<img class="author-thumb" style="object-fit: cover;" src="/media/{{curr_usr.image}}" alt="Sal">
+							{% else %}
+							<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+							{% endif %}
+						</a>
+					</div>
+					
+					<div class="col-md-8" id="commentsection">
+						<a class="link-dark" href="/{{curr_con.username}}/">{{curr_usr.name}}</a><br>
+						<span class="author-description">{{co.comment}}</span><br>
+						<span class="post-date">{{co.created}}</span>
+					</div>
+
+					<div class="col-md-2" id="commentbuttonsection"><br>
+						<a href="" id="editcommentbutton" onclick="editcommentsection(event)" class="btn follow p-2 m-1">&nbsp;Edit&nbsp;</a><br>
+						<a href="" id="deletecommentbutton" onclick="deletecomment(event)" class="btn follow p-2 m-1">Delete</a>
+					</div>
+				</div>
+			</div>
+			{% else %}
+			<div class="mainheading">
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+						<a href="/{{curr_con.username}}/">
+							{% if curr_usr.image %}
+							<img class="author-thumb" style="object-fit: cover;" src="/media/{{curr_usr.image}}" alt="Sal">
+							{% else %}
+							<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+							{% endif %}
+						</a>
+					</div>
+					
+					<div class="col-md-8" id="commentsection"><br>
+						<textarea name="commment" id="commentinput" onkeyup="textAreaAdjust(this)" class="scroll" rows="3" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize: none;" placeholder="Write Comment"></textarea>
+					</div>
+
+					<div class="col-md-2" id="commentbuttonsection"><br>
+						<a href="" id="commentbutton" onclick="commentbutton(event)" class="btn subscribe m-1">Comment</a>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% else %}
+			<div class="mainheading">
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+					</div>
+					
+					<div class="col-md-8" style="width: 100%; max-width: 100%; text-align: center;"><br>
+						<a href="/me/login/?next=/{{con.username}}/{{po.title|slugify}}-{{po.id}}" class="btn subscribe">Login To Comment</a>
+					</div>
+
+					<div class="col-md-2" id="commentbuttonsection">
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% for comment in comments %}
+			{% for conn, usrr in di.items %}
+			{% if conn.id == comment.user_id %}
+			{% if not conn.id == curr_con.id %}
+			<div class="mainheading">
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+						<a href="/{{conn.username}}/">
+							{% if usrr.image %}
+							<img class="author-thumb" style="object-fit: cover;" src="/media/{{usrr.image}}" alt="Sal">
+							{% else %}
+							<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+							{% endif %}
+						</a>
+					</div>
+					<div class="col-md-10">
+						<a class="link-dark" href="/{{conn.username}}/">{{usrr.name}}</a><br>
+						<span class="author-description">{{comment.comment}}</span><br>
+						<span class="post-date">{{comment.created}}</span>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% endif %}
+			{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+</div> -->
+
+<!-- Begin AlertBar
+================================================== -->
+<div class="alertbar">
+	<div class="container text-center">
+		<!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> &nbsp;  -->
+		{% if bookmark %}
+		<a href="" id="bookmarkbutton" onclick="bookmarkbutton(event, '{{con.username}}', {{po.id}})"><i class="fa fa-bookmark fa-lg"></i></a>
+		{% else %}
+		<a href="" id="bookmarkbutton" onclick="bookmarkbutton(event, '{{con.username}}', {{po.id}})"><i class="fa fa-bookmark-o fa-lg"></i></a>
+		{% endif %}
+		&nbsp;
+		<a id="likescount">{{likes.count}}</a>
+		{% if like %}
+		<a href="" id="likebutton" onclick="likebutton(event, '{{con.username}}', {{po.id}})"><i class="fa fa-heart fa-lg" style="color: red;"></i></a>
+		{% else %}
+		<a href="" id="likebutton" onclick="likebutton(event, '{{con.username}}', {{po.id}})"><i class="fa fa-heart-o fa-lg"></i></a>
+		{% endif %}
+		{% if not thisisuser %}
+		{% if follow %}
+		<a href="#" id="followbutton" onclick="followbutton(event, '{{con.username}}', {{po.id}})" class="btn follow p-2">Following</a>
+		{% else %}
+		<a href="#" id="followbutton" onclick="followbutton(event, '{{con.username}}', {{po.id}})" class="btn subscribe">Follow</a>
+		{% endif %}
+		{% endif %}
+	</div>
+</div>
+<!-- End AlertBar
+================================================== -->
+
+<!-- Begin Footer
+================================================== -->
+<div class="container">
+	<div class="footer">
+		<p class="pull-left">
+			 Copyright &copy; 2017 Your Website Name
+		</p>
+		<p class="pull-right">
+			 Mediumish Theme by <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a>
+		</p>
+		<div class="clearfix">
+		</div>
+	</div>
+</div>
+<!-- End Footer
+================================================== -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>
+	function textAreaAdjust(element) {
+		element.style.height = "1px";
+		element.style.height = (25+element.scrollHeight)+"px";
+	  }
+</script>
+<script>
+	var likescount = parseInt('{{likes.count}}')
+	likebutton = function(e, username, post_id){
+		e.preventDefault()
+		url = `/like-${username}-${post_id}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				if (data.like == 'created'){
+					likescount = likescount + 1
+					document.getElementById('likescount').innerHTML = `${likescount}`
+					document.getElementById('likebutton').innerHTML = `<i class="fa fa-heart fa-lg" style="color: red;"></i>`
+				} else if (data.like == 'deleted'){
+					likescount = likescount - 1
+					document.getElementById('likescount').innerHTML = `${likescount}`
+					document.getElementById('likebutton').innerHTML = `<i class="fa fa-heart-o fa-lg"></i>`
+				}
+			} else if (data.status == 'login'){
+				window.location.replace(`/me/login/${data.next}`)
+			} else if (data.status == 'fail'){
+				window.location.replace(data.next)
+			}
+		})
+	}
+
+	bookmarkbutton = function(e, username, post_id){
+		e.preventDefault()
+		url = `/bookmark-${username}-${post_id}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				if (data.bookmark == 'created'){
+					document.getElementById('bookmarkbutton').innerHTML = `<i class="fa fa-bookmark fa-lg"></i>`
+				} else if (data.bookmark == 'deleted'){
+					document.getElementById('bookmarkbutton').innerHTML = `<i class="fa fa-bookmark-o fa-lg"></i>`
+				}
+			} else if (data.status == 'login'){
+				window.location.replace(`/me/login/${data.next}`)
+			} else if (data.status == 'fail'){
+				window.location.replace(data.next)
+			}
+		})
+	}
+
+	followbutton = function(e, username, post_id){
+		e.preventDefault()
+		url = `/follow-${username}-${post_id}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				if (data.follow == 'created'){
+					document.getElementById('followbutton').innerText = "Following"
+					document.getElementById('followbutton').setAttribute('class', 'btn follow p-2')
+					document.getElementById('followuserbutton').innerText = "Following"
+					document.getElementById('followuserbutton').setAttribute('class', 'btn follow p-2')
+				} else if (data.follow == 'deleted'){
+					document.getElementById('followbutton').innerText = "Follow"
+					document.getElementById('followbutton').setAttribute('class', 'btn subscribe')
+					document.getElementById('followuserbutton').innerText = "Follow"
+					document.getElementById('followuserbutton').setAttribute('class', 'btn subscribe')
+				}
+			} else if (data.status == 'login'){
+				window.location.replace(`/me/login/${data.next}`)
+			} else if (data.status == 'fail'){
+				window.location.replace(data.next)
+			}
+		})
+	}
+</script>
+<!-- <script>
+	var po = "{{po.id}}"
+	var curr_usr = "{{curr_usr.name}}"
+	var conn = "{{con.username}}"
+	commentbutton = function(e){
+		e.preventDefault()
+		comment = document.getElementById('commentinput').value
+		if  (comment != '' && comment != ' ' && typeof comment != 'undefined' && comment.trim().length != 0){
+			document.getElementById('commentsection').innerHTML = 'Adding Comment...'
+			document.getElementById('commentbuttonsection').innerHTML = ''
+			url = `/comment-${conn}-${po}-${comment.trim()}/`
+			$.get(url, function(data){
+				if (data.status == 'success'){
+					document.getElementById('commentsection').innerHTML = `<br>
+					<a class="link-dark" href="/${conn}/">${curr_usr}</a><br>
+					<span class="author-description">${data.comment}</span>	
+					`
+					document.getElementById('commentbuttonsection').innerHTML = `<br>
+					<a href="" id="editcommentbutton" onclick="editcommentsection(event)" class="btn follow p-2 m-1">&nbsp;Edit&nbsp;</a><br>
+					<a href="" id="deletecommentbutton" onclick="deletecomment(event)" class="btn follow p-2 m-1">Delete</a>
+					`
+				}
+			})
+		}
+	}
+
+	deletecomment = function(e){
+		e.preventDefault()
+		url = `/delete_comment-${conn}-${po}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				document.getElementById('commentbuttonsection').innerHTML = `<br>
+				<a href="" id="commentbutton" onclick="commentbutton(event)" class="btn subscribe">Comment</a>`
+				document.getElementById('commentsection').innerHTML = `<br>
+				<textarea name="commment" id="commentinput" onkeyup="textAreaAdjust(this)" class="scroll" rows="3" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize: none;" placeholder="Write Comment"></textarea>`
+			}
+		})
+	}
+
+	editcommentsection = function(e){
+		e.preventDefault()
+		url = `/get_comment-${conn}-${po}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				document.getElementById('commentbuttonsection').innerHTML = `<br>
+				<a href="" id="editcommentbuttonbutton" onclick="saveeditcommentbutton(event)" class="btn subscribe m-1">Save</a>
+				<a href="" id="cancelcommentbutton" onclick="cancelcommentbutton(event, '${data.comment}')" class="btn follow p-2 m-1">Cancel</a>`
+				document.getElementById('commentsection').innerHTML = `<br>
+				<textarea name="commment" id="commentinput" onkeyup="textAreaAdjust(this)" class="scroll" rows="3" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize: none;" placeholder="Write Comment">${data.comment}</textarea>`
+			}
+		})
+	}
+
+	cancelcommentbutton = function(e, comment){
+		e.preventDefault()
+		document.getElementById('commentsection').innerHTML = `<br>
+		<a class="link-dark" href="/${conn}/">${curr_usr}</a><br>
+		<span class="author-description">${comment}</span>	
+		`
+		document.getElementById('commentbuttonsection').innerHTML = `<br>
+		<a href="" id="editcommentbutton" onclick="editcommentsection(event)" class="btn follow p-2 m-1">&nbsp;Edit&nbsp;</a><br>
+		<a href="" id="deletecommentbutton" onclick="deletecomment(event)" class="btn follow p-2 m-1">Delete</a>
+		`
+	}
+
+	saveeditcommentbutton = function(e){
+		e.preventDefault()
+		comment = document.getElementById('commentinput').value
+		if  (comment != '' && comment != ' ' && typeof comment != 'undefined' && comment.trim().length != 0){
+			url = `/edit_comment-${conn}-${po}-${comment.trim()}/`
+			$.get(url, function(data){
+				if (data.status == 'success'){
+					document.getElementById('commentsection').innerHTML = `<br>
+					<a class="link-dark" href="/${conn}/">${curr_usr}</a><br>
+					<span class="author-description">${data.comment}</span>
+					`
+					document.getElementById('commentbuttonsection').innerHTML = `<br>
+					<a href="" id="editcommentbutton" onclick="editcommentsection(event)" class="btn follow p-2 m-1">&nbsp;Edit&nbsp;</a><br>
+					<a href="" id="deletecommentbutton" onclick="deletecomment(event)" class="btn follow p-2 m-1">Delete</a>
+					`
+				}
+			})
+		}
+	}
+</script> -->
+
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script>
+	function textAreaAdjust(element) {
+		element.style.height = "1px";
+		element.style.height = (25+element.scrollHeight)+"px";
+	  }
+
+	  $('.scrolltextarea').each(function (e){
+		$(this).css('height', 'auto' );
+		$(this).height( this.scrollHeight );
+	});
+</script>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/tether.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/ie10-viewport-bug-workaround.js' %}"></script>
+<script src="{% static 'assets/js/mediumish.js' %}"></script>
+</body>
+</html>

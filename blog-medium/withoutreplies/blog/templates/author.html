@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{% static 'assets/img/favicon.ico' %}">
+<title>Mediumish - A Medium style template by WowThemes.net</title>
+<!-- Bootstrap core CSS -->
+<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'assets/css/mediumish.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+	<!-- begin logo -->
+	<a class="navbar-brand" href="index.html">
+    <img src="{% static 'assets/img/logo.png' %}" alt="">
+  </a>
+	<!-- end logo -->
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<!-- begin menu -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			<a class="nav-link" href="index.html">Stories <span class="sr-only">(current)</span></a>
+			</li>
+      <li class="nav-item">
+			<a class="nav-link" href="post.html">Post</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="author.html">Author</a>
+			</li>
+		</ul>
+		<!-- end menu -->
+		<!-- begin search -->
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+		</form>
+		<!-- end search -->
+	</div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Top Author Page
+================================================== -->
+<div class="container">
+	<div class="mainheading">
+		<div class="row post-top-meta authorpage">
+			<div class="col-2">
+				<div class="col-md-2 col-xs-12">
+					{% if usr.image %}
+					<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+					{% else %}
+					<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-10">
+				{% if usr.name %}
+				<h1 class="sitetitle">{{usr.name}}</h1>
+				{% else %}
+				<h1 class="sitetitle">{{con.username}}</h1>
+				{% endif %}
+				<p class="lead">
+					 {{usr.bio}}
+				</p>
+				{% if not thisisuser %}
+			{% if follow %}
+			<a href="#" id="followbutton" onclick="followbutton(event, '{{con.username}}')" class="btn follow p-2">Following</a>
+			{% else %}
+			<a href="#" id="followbutton" onclick="followbutton(event, '{{con.username}}')" class="btn subscribe">Follow</a>
+			{% endif %}
+			{% endif %}
+			</div>
+		</div>
+	</div>
+	<section class="featured-posts">
+	<div class="section-title">
+		<h2><span><a href="/{{con.username}}/" style="color: black;">Posts : {{posts.count}}</a></span> &nbsp;&nbsp;
+			<a href="/{{con.username}}/followers/" style="color: black;" id="followers">Followers : {{followers}}</a>&nbsp;&nbsp;
+			<a href="/{{con.username}}/following/" style="color: black;" id="following">Following : {{following}}</a>
+			
+		</h2>
+	</div>
+</section>
+</div>
+<!-- End Top Author Meta
+================================================== -->
+
+<!-- Begin Author Posts
+================================================== -->
+<div class="graybg authorpage">
+	<div class="container">
+		<div class="listrecent listrelated">
+			{% if not di %}
+			<div class="authorpostbox">
+				<div class="">
+					<div class="card-block">
+						<h2 class="card-title">
+							{% if usr.name %}
+							{{usr.name}}
+							{% else %}
+							{{con.username}}
+							{% endif %}
+							 has not posted anything yet!</h2>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+
+				<!-- begin post -->
+				{% for post, like in di.items reversed %}
+				<div class="authorpostbox">
+					<div class="card">
+						{% if post.thumbnail %}
+						<a href="/{{con.username}}/{{post.title|slugify}}-{{post.id}}/">
+						<img class="img-fluid img-thumb" src="{{post.thumbnail}}" alt="">
+						</a>
+						{% endif %}
+						<div class="card-block">
+							<h2 class="card-title"><a href="/{{con.username}}/{{post.title|slugify}}-{{post.id}}/">{{post.title}}</a></h2>
+							<h4 class="card-text">{{post.caption}}</h4>
+								<div class="metafooter">
+								<div class="wrapfooter">
+									<span class="meta-footer-thumb">
+									<a href="/{{con.username}}/">
+										{% if usr.image %}
+										<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+										{% else %}
+										<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+										{% endif %}
+									</a>
+									</span>
+									<span class="author-meta">
+									{% if usr.name %}
+									<span class="post-name"><a href="/{{con.username}}/">{{usr.name}}</a></span>
+									{% else %}
+									<span class="post-name"><a href="/{{con.username}}/">{{con.username}}</a></span>
+									{% endif %}
+									<br/>
+									<span class="post-date">{{post.created}}</span><span class="dot"></span><span class="post-read">6 min read</span>
+									</span>
+									<span class="post-read-more">{{like}}<a title="Likes">&nbsp;<i class="fa fa-heart-o fa-2x"></i></a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<!-- end post -->
+		    
+
+		</div>
+	</div>
+</div>
+<!-- End Author Posts
+================================================== -->
+
+<!-- Begin Footer
+================================================== -->
+<div class="container">
+	<div class="footer">
+	  <p class="pull-left">
+	    Copyright &copy; 2017 Your Website Name
+	  </p>
+	  <p class="pull-right">
+	    Mediumish Theme by <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a>
+	  </p>
+	<div class="clearfix"></div>
+	</div>
+</div>
+<!-- End Footer
+================================================== -->
+
+<script>
+	var followers = parseInt('{{followers}}')
+	var following = parseInt('{{following}}')
+	
+	bookmarkbutton = function(e, username, post_id){
+		e.preventDefault()
+		url = `/bookmark-${username}-${post_id}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				if (data.bookmark == 'created'){
+					document.getElementById('bookmarkbutton'+post_id).innerHTML = `<i class="fa fa-bookmark fa-lg"></i>`
+				} else if (data.bookmark == 'deleted'){
+					document.getElementById('bookmarkbutton'+post_id).innerHTML = `<i class="fa fa-bookmark-o fa-lg"></i>`
+				}
+			}
+		})
+	}
+
+	followbutton = function(e, username){
+		e.preventDefault()
+		url = `/follow_user-${username}/`
+		$.get(url, function(data){
+			if (data.status == 'success'){
+				if (data.follow == 'created'){
+					followers = followers + 1
+					document.getElementById('followers').innerText = `Followers : ${followers}`
+					document.getElementById('followbutton').innerText = "Following"
+					document.getElementById('followbutton').setAttribute('class', 'btn follow p-2')
+				} else if (data.follow == 'deleted'){
+					followers = followers - 1
+					document.getElementById('followers').innerText = `Followers : ${followers}`
+					document.getElementById('followbutton').innerText = "Follow"
+					document.getElementById('followbutton').setAttribute('class', 'btn subscribe')
+				}
+			}
+		})
+	}
+</script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/tether.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/ie10-viewport-bug-workaround.js' %}"></script>
+</body>
+</html>

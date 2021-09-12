@@ -1,0 +1,260 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{% static 'assets/img/favicon.ico' %}">
+<title>Mediumish - A Medium style template by WowThemes.net</title>
+<!-- Bootstrap core CSS -->
+<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'assets/css/mediumish.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+	<!-- begin logo -->
+	<a class="navbar-brand" href="index.html">
+    <img src="{% static 'assets/img/logo.png' %}" alt="">
+  </a>
+	<!-- end logo -->
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<!-- begin menu -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			<a class="nav-link" href="index.html">Stories <span class="sr-only">(current)</span></a>
+			</li>
+      <li class="nav-item">
+			<a class="nav-link" href="post.html">Post</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="author.html">Author</a>
+			</li>
+		</ul>
+		<!-- end menu -->
+		<!-- begin search -->
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+		</form>
+		<!-- end search -->
+	</div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Top Author Page
+================================================== -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="mainheading">
+				<div class="row post-top-meta authorpage">
+					<div class="col-md-2 col-xs-12">
+						{% if usr.image %}
+						<img class="author-thumb" style="object-fit: cover;" src="../media/{{usr.image}}" alt="Sal">
+						{% else %}
+						<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+						{% endif %}
+					</div>
+
+					<div class="col-md-10 col-xs-12"><br>
+                        <div class="row">
+                            <div class="col">
+								{% if usr.name %}
+                                <h1>{{usr.name}}</h1>
+								{% else %}
+                                <h1>Your Name</h1>
+								{% endif %}
+                            </div>
+                            <div class="col">
+                                <a href="" data-toggle="modal" data-target="#exampleModalCenter2" class="fa fa-pencil-square-o fa-2x"></a>
+                            </div>
+                        </div>
+						{% if usr.bio %}
+						<span class="author-description">{{usr.bio}}</span>
+						{% else %}
+						<span class="author-description">Your Bio</span>
+						{% endif %}
+						<!-- <div class="sociallinks"><a  target="_blank" href="https://www.facebook.com/wowthemesnet/"><i class="fa fa-facebook"></i></a> <span class="dot"></span> <a target="_blank" href="https://plus.google.com/s/wowthemesnet/top"><i class="fa fa-google-plus"></i></a></div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Top Author Meta
+================================================== -->
+
+<!-- Begin Author Posts
+================================================== -->
+<div class="graybg authorpage">
+	<div class="container">
+		<div class="listrecent listrelated">
+
+				<!-- begin post -->
+				{% if posts %}
+				<div class="authorpostbox">
+					<div class="">
+						<div class="">
+							<h2 class="card-title"><a href="/me/write/" class="btn subscribe" style="color: white;">Write a Post!</a></h2>
+						</div>
+					</div>
+				</div>
+				{% for post in posts reversed %}
+				<div class="authorpostbox">
+					<div class="card">
+						<a href="/{{con.username}}/{{post.title|slugify}}-{{post.id}}/">
+						<img class="img-fluid img-thumb" src="{{post.thumbnail}}" alt="">
+						</a>
+						<div class="card-block">
+							<h2 class="card-title"><a href="/{{con.username}}/{{post.title|slugify}}-{{post.id}}/">{{post.title}}</a></h2>
+						<h4 class="card-text">{{post.caption}}</h4>
+							<div class="metafooter">
+								<div class="wrapfooter">
+									<span class="meta-footer-thumb">
+									<a href="/{{con.username}}/">
+										{% if usr.image %}
+										<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+										{% else %}
+										<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+										{% endif %}
+									</a>
+									</span>
+									<span class="author-meta">
+									<span class="post-name"><a href="/{{con.username}}/">{{usr.name}}</a></span><br/>
+									<span class="post-date">{{post.created}}</span><span class="dot"></span><span class="post-read">6 min read</span>
+									</span>
+									<span class="post-read-more"><a href="" data-toggle="modal" data-target="#exampleModalCenter--{{post.id}}" title="Delete Post"><i class="fa fa-trash fa-2x"></i></a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<!-- end post -->
+				{% else %}
+				<div class="authorpostbox">
+					<div class="card">
+						<div class="card-block">
+							<h2 class="card-title"><a href="/me/write/">No Posts Yet. Add Now!</a></h2>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+
+				
+
+		</div>
+	</div>
+</div>
+<!-- End Author Posts
+================================================== -->
+
+<!-- Begin Footer
+================================================== -->
+<div class="container">
+	<div class="footer">
+	  <p class="pull-left">
+	    Copyright &copy; 2017 Your Website Name
+	  </p>
+	  <p class="pull-right">
+	    Mediumish Theme by <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a>
+	  </p>
+	<div class="clearfix"></div>
+	</div>
+</div>
+<!-- End Footer
+================================================== -->
+
+  <!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+		<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+			<div class="modal-body">
+				<div class="mainheading">
+					<div class="row post-top-meta authorpage">
+						<div class="col-md-4 col-xs-12">
+							{% if usr.image %}
+							<img class="author-thumb" style="object-fit: cover;" src="../media/{{usr.image}}" alt="Sal">
+							<a href="/me/delete_image/" class="btn follow">Delete</a>
+							{% else %}
+							<img class="author-thumb" id="imagepreview" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+							<input type="file" id="imagepreviewinput" name="image">
+							{% endif %}
+						</div>
+
+						<div class="col-md-8 col-xs-12"><br>
+							<textarea name="name" class="scroll" id="cardtitle" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize:none;" rows="2" placeholder="Name">{{usr.name}}</textarea>
+							<textarea name="bio" class="scroll" rows="3" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize: none;" placeholder="Bio">{{usr.bio}}</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+
+{% for post in posts %}
+  <div class="modal fade" id="exampleModalCenter--{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<div class="modal-body" style="width: 100%; max-width: 100%; text-align: center;">
+		  <i class="fa fa-trash fa-4x" style="color: blue"></i><br><br>
+		  <h4>Are you sure you want to delete the post</h4>
+		  <h4>"{{post.title}}"</h4>
+
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+		  <a href="/me/delete_post-{{post.id}}/"><button type="button" class="btn btn-primary">Delete</button></a>
+		</div>
+	  </div>
+	</div>
+  </div>
+  {% endfor %}
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+
+<script>
+	document.getElementById('imagepreviewinput').addEventListener('change', function(){
+		var img = document.getElementById('imagepreviewinput').files[0]
+      	var url = URL.createObjectURL(img)
+		document.getElementById('imagepreview').setAttribute('src', url)
+		document.getElementById('imagepreview').setAttribute('style', 'object-fit:cover;')
+	})
+</script>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/tether.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/ie10-viewport-bug-workaround.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,648 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{% static 'assets/img/favicon.ico' %}">
+<title>Mediumish - A Medium style template by WowThemes.net</title>
+<!-- Bootstrap core CSS -->
+<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'assets/css/mediumish.css' %}" rel="stylesheet">
+<style>
+	.scroll::-webkit-scrollbar {
+		display: none;
+	  }
+	  .line-clamp {
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;  
+	  }
+	  .changedisplaysetting {
+		  display : none;
+	  }
+</style>
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+	<!-- Begin Logo -->
+	<a class="navbar-brand" href="index.html">
+	<img src="{% static 'assets/img/logo.png' %}" alt="logo">
+	</a>
+	<!-- End Logo -->
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<!-- Begin Menu -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+			<a class="nav-link" href="index.html">Stories <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="post.html">Post</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="author.html">Author</a>
+			</li>
+			<li class="nav-item">
+				<button type="button" class="btn subscribe" data-toggle="modal" data-target=".bd-example-modal-lg">Save</button>
+			</li>
+		</ul>
+		<!-- End Menu -->
+		<!-- Begin Search -->
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+		</form>
+		<!-- End Search -->
+	</div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Article
+================================================== -->
+<div class="container">
+	<div class="row">
+
+		<!-- Begin Fixed Left Share -->
+		<div class="col-md-2 col-xs-12">
+			<!--This place can be used for ads-->
+		</div>
+		<!-- End Fixed Left Share -->
+
+		<!-- Begin Post -->
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+            <form method="POST" id="postForm">{% csrf_token %}
+			<div class="mainheading">
+				<h1 class="posttitle"><textarea name="title" class="scroll" rows="2" onkeyup="textAreaAdjust(this)" id="posttitle" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;;" placeholder="Post Title">{{post.title}}</textarea></h1>
+            </div>
+
+			<!-- Begin Featured Image -->
+			<!-- <img class="featured-image img-fluid" src="{% static 'assets/img/demopic/10.jpg' %}" alt=""> -->
+			<!-- End Featured Image -->
+
+			<!-- Begin Post Content -->
+			<div class="article-post">
+				<div id="editorjs"></div>
+                <!-- <textarea class="editable" name="post" style="width: 100%; max-width: 100%; border-color: transparent; outline: none; height:300px">{{post.post}}</textarea> -->
+				<!-- All the post data here -->
+
+			<!-- Begin Tags -->
+			<!-- <div class="after-post-tags">
+				<ul class="tags">
+					<li><a href="#">Design</a></li>
+					<li><a href="#">Growth Mindset</a></li>
+					<li><a href="#">Productivity</a></li>
+					<li><a href="#">Personal Growth</a></li>
+				</ul>-->
+			</div> 
+			<!-- End Tags -->
+			<!-- <div class="mainheading">
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+						<a href="author.html"><img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal"></a>
+					</div>
+					<div class="col-md-10">
+						<a class="link-dark" href="author.html">Sal</a><a href="#" class="btn subscribe">Follow</a><a href="#" class="btn follow p-2">Following</a>
+						<span class="author-description">Founder of WowThemes.net and creator of <b>"Mediumish"</b> theme that you're currently previewing. Developing professional premium themes, templates, plugins, scripts since 2012.</span>
+						<span class="post-date">22 July 2017</span><span class="dot"></span><span class="post-read">6 min read</span>
+					</div>
+				</div>
+			</div> -->
+			<div class="modal bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<div class="modal-body">
+						
+						<section class="featured-posts">
+							<div class="listfeaturedtag">
+								<div class="card">
+									<div class="row">
+										<div class="col-md-5 wrapthumbnail" id="insertimagethumbnail">
+												<!-- <div class="thumbnail" style="background-image:url({% static 'assets/img/demopic/1.jpg' %});">
+												</div> -->
+											{% if post.thumbnail %}												
+											<div class="thumbnail" onclick="opensearchagain(event)" style="background-image:url({{post.thumbnail}});">
+											</div>
+											{% else %}
+											<div class="thumbnail" style="justify-content: center; align-items: center; text-align: center; display: flex;">
+													<button type="button" class="btn subscribe" data-toggle="modal" data-target=".bd-example-modal-lg-unsplash">Add Thumbnail</button>
+												</div>
+											{% endif %}
+										</div>
+										<div class="col-md-7">
+											<div class="card-block">
+												<input type="hidden" id="thumbnailimagesrc" name="thumbnail" value="{{post.thumbnail}}">
+												<input type="hidden" id="tagsinput" name="tags" value="{{post.tags}}">
+												<h2 class="card-title"><textarea name="cardtitle" class="scroll" id="cardtitle" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize:none;" rows="2" placeholder="Post Title">{{post.title}}</textarea></h2>
+												<h4 class="card-text"><textarea id="cardcaption" name="caption" class="scroll" rows="3" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;resize: none;" placeholder="Post Caption">{{post.caption}}</textarea></h4>
+												<div class="metafooter">
+													<div class="wrapfooter">
+														<span class="meta-footer-thumb">
+														<a>
+															{% if usr.image %}
+															<img class="author-thumb" style="object-fit: cover;" src="/media/{{usr.image}}" alt="Sal">
+															{% else %}
+															<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal">
+															{% endif %}
+														</a>
+														</span>
+														<span class="author-meta">
+														<span class="post-name"><a>{{usr.name}}</a></span><br/>
+														<span class="post-date">{{post.created}}</span><span class="dot"></span><span class="post-read">6 min read</span>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<div class="m-2" style="justify-content: center; align-items: center; text-align: center; display: flex;">
+							<form class="form-inline my-2 my-lg-0">
+								<input class="form-control mr-sm-2" id="addtaginput" type="text" placeholder="Add tags">
+								<div id="addtagcontainer">
+									<button class="btn subscribe" id="addtagbutton">Add</button>
+								</div>
+							</form>
+						</div>
+						<div class="after-post-tags">
+							<ul class="tags" id="addtaghere">
+								{% for ta in tags %}
+								<li><a class="tag--{{ta | slugify}}" onclick="deletetag(event, '{{ta|slugify}}')">{{ta}}&nbsp;<i class="fa fa-times"></i></a></li>
+								{% endfor %}
+							</ul>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn subscribe">Save To Draft</button>
+					  <button id="saveButton" class="btn subscribe">Publish</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
+        </form>
+		</div>
+		<!-- End Post -->
+
+	</div>
+</div>
+<!-- End Article
+================================================== -->
+
+<div class="hideshare"></div>
+
+
+<div id="imagesearchmodal" class="modal bd-example-modal-lg-unsplash" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		  <button type="button" id="closesearchmodal" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body" style="overflow: scroll;">
+		
+			<div class="m-2" style="justify-content: center; align-items: center; text-align: center; display: flex;">
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="text" id="unsplashimagesearch" placeholder="Search">
+					<button class="btn subscribe" id="unsplashimagesearchbutton">Search</button>
+				</form>
+			</div>
+		
+			<section class="featured-posts">
+				<div class="listfeaturedtag">
+					<div class="card">
+						<div class="row" id="imagebox">
+							<div class="m-2" id="loadmorecontainer" style="width:100%;justify-content: center; align-items: center; text-align: center; display: flex;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+	  </div>
+	</div>
+  </div>
+
+
+
+<!-- Begin AlertBar
+================================================== -->
+<!-- <div class="alertbar">
+	<div class="container text-center">
+		 <img src="{% static 'assets/img/logo.png' %}" alt=""> &nbsp; 
+		<a href=""><i class="fa fa-bookmark-o fa-lg"></i>&nbsp;<i class="fa fa-bookmark fa-lg"></i></a>&nbsp;
+			<a href=""><i class="fa fa-heart-o fa-lg"></i>&nbsp;<i class="fa fa-heart fa-lg"></i></a>
+		  <a href="#" class="btn subscribe">Follow</a><a href="#" class="btn follow p-2">Following</a>
+	</div>
+</div> -->
+<!-- End AlertBar
+================================================== -->
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="{% static 'textarea/js/medium-editor.js' %}"></script>
+    <script>
+        var editor = new MediumEditor('.editable', {
+            buttonLabels: 'fontawesome',
+            toolbar : { buttons : [ 'bold','italic', 'underline', 'anchor', 'h2', 'h3', 'quote', 'image' ] },
+            placeholder : { text : "Your post",
+            hideOnClick: false},
+            imageDragging: false
+        });
+    </script> -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script>
+	var cardtitle = document.getElementById('cardtitle')
+	var posttitle = document.getElementById('posttitle')
+	$('#cardtitle').on('input', function(){
+		posttitle.value = cardtitle.value
+	})
+	$('#posttitle').on('input', function(){
+		cardtitle.value = posttitle.value
+	})
+</script>
+
+<script>
+	$('#unsplashimagesearchbutton').on('click', function(e){
+		e.preventDefault()
+		var value = $('#unsplashimagesearch').val()
+		document.getElementById('imagebox').innerHTML = ""
+		loadunsplashimages(value, 10, 1)
+	})
+
+	loadunsplashimages = function(value, per_page, page){
+		url = `https://api.unsplash.com/search/photos?query=${value}&client_id=YOPWFEmTKFzUBMKKQwyCWlcdNoikErC0WfXsQB-f9-4&per_page=${per_page}&page=${page}`
+		$.get(url, function(data){
+			$('#loadmorecontainer').remove()
+			for(var x=0; x<data.results.length; x++){
+				var imagesrc = data.results[x].urls.regular
+				document.getElementById('imagebox').innerHTML += `
+				<div class="col-md-6 wrapthumbnail p-2">
+					<a onclick="getclickedimage(event, '${imagesrc}')">
+						<div class="thumbnail" style="background-image:url(${imagesrc});">
+						</div>
+					</a>
+				</div>
+				`
+				if (x+1 >= data.results.length){
+					document.getElementById('imagebox').innerHTML += `
+					<div class="m-2" id="loadmorecontainer" style="width:100%;justify-content: center; align-items: center; text-align: center; display: flex;">
+						<button class="btn subscribe" onclick="loadmoreimages(event, '${value}', ${per_page}, ${page})"> Load More </button>
+					</div>
+					`
+				}
+			}
+		})
+	}
+
+	loadmoreimages = function(e, value, per_page, page){
+		e.preventDefault()
+		document.getElementById('loadmorecontainer').innerHTML = "Loading..."
+		loadunsplashimages(value, per_page, page+1)
+	}
+</script>
+
+<script>
+	getclickedimage = function(event, imagesrc){
+		document.getElementById('insertimagethumbnail').innerHTML = `
+		<div class="thumbnail" onclick="opensearchagain(event)" style="background-image:url(${imagesrc});">
+		</div>
+		`
+		document.getElementById('thumbnailimagesrc').value = imagesrc
+		$("#imagesearchmodal").modal('hide')
+	}
+
+	opensearchagain = function(){
+		$("#imagesearchmodal").modal('show')
+	}
+</script>
+
+<script>
+	var nooftags = parseInt("{{nooftags}}")
+	document.getElementById("addtagbutton").addEventListener('click', function(e){
+		e.preventDefault()
+		var tag = document.getElementById('addtaginput').value
+		if (typeof tag != "undefined" && tag != null && tag != "" && tag != " " && nooftags < 5 && tag.trim().length != 0){
+			document.getElementById('addtaghere').innerHTML += `
+			<li><a class="tag--${convertToSlug(tag.trim())}" onclick="deletetagjs(event, '${tag.trim()}')">${tag.trim()}&nbsp;<i class="fa fa-times"></i></a></li>
+			`
+			$('#addtaginput').val('')
+			console.log(convertToSlug(tag.trim()))
+			nooftags = nooftags + 1
+			document.getElementById('tagsinput').value += `${tag.trim()},`
+		}
+		if (nooftags > 4){
+			document.getElementById('addtagcontainer').setAttribute("style", "display:none")
+		} else {
+			document.getElementById('addtagcontainer').setAttribute("style", "display:block")
+		}
+	})
+
+	function convertToSlug(Text)
+	{
+		return Text
+			.toLowerCase()
+			.replace(/[^\w ]+/g,'')
+			.replace(/ +/g,'-')
+			;
+	}
+
+	
+	deletetag = function(e, tag){
+		e.preventDefault()
+		var tagelement = document.getElementsByClassName('tag--'+tag)
+		if (tagelement && nooftags > 0){
+			document.querySelectorAll('.tag--'+tag).forEach(el => {
+				el.remove()
+				nooftags = nooftags - 1
+				var str = document.getElementById('tagsinput').value
+				var res = str.split(",");
+				var x = `${tag}`
+				for (var i=0; i<res.length; i++){
+					if (x==convertToSlug(res[i])){
+						res.splice(i, 1)
+						break;
+					}
+				}
+				document.getElementById('tagsinput').value = res.toString()
+			});
+		}
+		if (nooftags < 5){
+			document.getElementById('addtagcontainer').setAttribute("style", "display:block")
+		} else {
+			document.getElementById('addtagcontainer').setAttribute("style", "display:none")
+		}
+	}
+
+	deletetagjs = function(e, tag){
+		e.preventDefault()
+		var tagelement = document.getElementsByClassName('tag--'+convertToSlug(tag))
+		console.log(tag)
+		console.log(convertToSlug(tag))
+		if (tagelement && nooftags > 0){
+			document.querySelectorAll('.tag--'+convertToSlug(tag)).forEach(el => {
+				el.remove()
+				nooftags = nooftags - 1
+				var str = document.getElementById('tagsinput').value
+				var res = str.split(",");
+				var x = `${tag}`
+				for (var i=0; i<res.length; i++){
+					if (x==res[i]){
+						res.splice(i, 1)
+						break;
+					}
+				}
+				document.getElementById('tagsinput').value = res.toString()
+			});
+		}
+		if (nooftags < 5){
+			document.getElementById('addtagcontainer').setAttribute("style", "display:block")
+		} else {
+			document.getElementById('addtagcontainer').setAttribute("style", "display:none")
+		}
+	}
+</script>
+
+<script>
+	function textAreaAdjust(element) {
+		element.style.height = "1px";
+		element.style.height = (25+element.scrollHeight)+"px";
+	  }
+</script>
+
+
+<script src="{% static 'write/js/header.js' %}"></script><!-- Header -->
+  <script src="{% static 'write/js/simple-image.js' %}"></script><!-- Image -->
+  <script src="{% static 'write/js/delimiter.js' %}"></script><!-- Delimiter -->
+  <script src="{% static 'write/js/list.js' %}"></script><!-- List -->
+  <script src="{% static 'write/js/quote.js' %}"></script><!-- Quote -->
+  <script src="{% static 'write/js/code.js' %}"></script><!-- Code -->
+  <script src="{% static 'write/js/embed.js' %}"></script><!-- Embed -->
+  <script src="{% static 'write/js/table.js' %}"></script><!-- Table -->
+  <script src="{% static 'write/js/link.js' %}"></script><!-- Link -->
+
+  <script src="{% static 'write/js/marker.js' %}"></script><!-- Marker -->
+  <script src="{% static 'write/js/inline-code.js' %}"></script><!-- Inline Code -->
+
+  <!-- Load Editor.js's Core -->
+  <script src="{% static 'write/js/editor.js' %}"></script>
+  <script>
+				
+    /**
+     * To initialize the Editor, create a new instance with configuration object
+     * @see docs/installation.md for mode details
+     */
+    var editor = new EditorJS({
+      /**
+       * Enable/Disable the read only mode
+       */
+      readOnly: false,
+
+      /**
+       * Wrapper of Editor
+       */
+      holder: 'editorjs',
+
+      /**
+       * Common Inline Toolbar settings
+       * - if true (or not specified), the order from 'tool' property will be used
+       * - if an array of tool names, this order will be used
+       */
+      // inlineToolbar: ['link', 'marker', 'bold', 'italic'],
+      // inlineToolbar: true,
+
+      /**
+       * Tools list
+       */
+      tools: {
+        /**
+         * Each Tool is a Plugin. Pass them via 'class' option with necessary settings {@link docs/tools.md}
+         */
+        header: {
+          class: Header,
+          inlineToolbar: ['marker', 'link'],
+          config: {
+            placeholder: 'Header'
+          },
+          shortcut: 'CMD+SHIFT+H'
+        },
+
+        /**
+         * Or pass class directly without any configuration
+         */
+        image: SimpleImage,
+
+        list: {
+          class: List,
+          inlineToolbar: true,
+          shortcut: 'CMD+SHIFT+L'
+        },
+
+
+        quote: {
+          class: Quote,
+          inlineToolbar: true,
+          config: {
+            quotePlaceholder: 'Enter a quote',
+            captionPlaceholder: 'Quote\'s author',
+          },
+          shortcut: 'CMD+SHIFT+O'
+        },
+
+
+        marker: {
+          class:  Marker,
+          shortcut: 'CMD+SHIFT+M'
+        },
+
+        //code: {
+        //  class:  CodeTool,
+        //  shortcut: 'CMD+SHIFT+C'
+        //},
+
+        delimiter: Delimiter,
+
+        inlineCode: {
+          class: InlineCode,
+          shortcut: 'CMD+SHIFT+C'
+        },
+
+
+        embed: Embed,
+      },
+
+
+    });
+
+    /**
+     * Saving button
+     */
+    const saveButton = document.getElementById('saveButton');
+
+    /**
+     * Saving example
+     */
+	 
+
+	var post_id = parseInt("{{post.id}}")
+    saveButton.addEventListener('click', function (e) {
+		e.preventDefault()
+      editor.save()
+        .then((savedData) => {
+			var post_json = savedData;
+          	var post_html = convertDataToHtml(savedData.blocks);
+			var title = document.getElementById('posttitle').value
+			var caption = document.getElementById('cardcaption').value
+			var thumbnail = document.getElementById('thumbnailimagesrc').value
+			var tags = document.getElementById('tagsinput').value
+			if (post_html && title){
+				url = `/me/edit_post-${post_id}/`
+				data = {title:title, caption:caption, thumbnail:thumbnail, tags:tags, post_html:post_html, post_json:post_json}
+				$.ajax({
+					'type':'POST',
+					'url':url,
+					'data':JSON.stringify(data),
+					'success': function(response){
+						window.location.replace('/me/')
+					},
+					'error': function(error){
+						console.log(error)
+					}
+				})
+			}
+        })
+        .catch((error) => {
+          console.error('Saving error', error);
+        });
+    });
+
+	convertDataToHtml = function(blocks) {
+		var convertedHtml = "";
+		blocks.map(block => {
+		  
+		  switch (block.type) {
+			case "header":
+			  convertedHtml += `<h${block.data.level}>${block.data.text}</h${block.data.level}><br>`;
+			  break;
+			case "quote":
+				convertedHtml += `<blockquote>${block.data.text}</blockquote><blockquote>${block.data.caption}</blockquote><br>`
+				break;
+			case "embed":
+			  convertedHtml += `<div style="width:100%;max-width:100%;text-align:center;"><iframe width="100%" height="315" src="${block.data.embed}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
+				<a href="${block.data.url}" class="changedisplaysetting" style="font-size: 10px;"> ${block.data.caption}</a></div><br>`;
+			  break;
+			case "paragraph":
+			  convertedHtml += `<p>${block.data.text}</p><br>`;
+			  break;
+			case "delimiter":
+			  convertedHtml += "<div style='width:100%;max-width:100%;text-align:center;'><h2>* * *</h2></div><br>";
+			  break;
+			case "image":
+			  convertedHtml += `<figure>
+                <div style="width:100%;max-width:100%;text-align:center;">
+                    <img class="featured-image img-fluid mb-0" src=${block.data.url}>
+                    <a href="${block.data.url}" class="changedisplaysetting" style="font-size: 10px;">Image Source &nbsp; ${block.data.caption}</a>
+                </div>
+            <figure><br> 
+			  `;
+			  break;
+			case "list":
+			  convertedHtml += "<ol>";
+			  block.data.items.forEach(function(li) {
+				convertedHtml += `<li>${li}</li>`;
+			  });
+			  convertedHtml += "</ol><br>";
+			  break;
+			case "code":
+			convertedHtml += `<textarea class="scrolltextarea" readonly rows="5" style="width: 100%; max-width: 100%; border-color: transparent; outline: none;background-color:#fafafa;padding:15px;">${block.data.code}</textarea><br>`
+			  break;
+			default:
+			  console.log("Unknown block type", block.type);
+			  break;
+		  }
+		});
+		return convertedHtml;
+	  }
+
+  </script>
+
+
+
+
+
+
+<script src="{% static 'assets/js/tether.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/ie10-viewport-bug-workaround.js' %}"></script>
+<script src="{% static 'assets/js/mediumish.js' %}"></script>
+</body>
+</html>
